@@ -1,12 +1,26 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
+from fastapi.responses import HTMLResponse
 
 app = FastAPI()
 
 @app.get("/")
-def read_root():
-    return { "msg": "Hello from Helen Hero!", "v": "0.1" }
+def root():
+    return {"message": "Hello from FastAPI!"}
 
+# Steg 3 i uppgiften: JSON-route
+@app.get("/api/ip")
+def get_ip(request: Request):
+    ip = request.client.host
+    return {"ip": ip}
 
-@app.get("/items/{id}")
-def read_item(item_id: int, q: str = None):
-    return {"id": id, "q": q}
+# Vidareutveckling: HTML-route
+@app.get("/ip", response_class=HTMLResponse)
+def get_ip_html(request: Request):
+    ip = request.client.host
+    return f"""
+    <html>
+        <body>
+            <h1>Din publika IP-adress är {ip}</h1>
+        </body>
+    </html>
+    """
