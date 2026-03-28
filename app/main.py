@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse, HTMLResponse
+import uvicorn
 
 app = FastAPI(title="What Is My IP Service")
 
@@ -113,3 +114,6 @@ async def get_ip_html(request: Request):
     </html>
     """
     return HTMLResponse(content=html_content)
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
