@@ -113,4 +113,3 @@ async def get_ip_html(request: Request):
     </html>
     """
     return HTMLResponse(content=html_content)
-    return HTMLResponse(content=html_content)
